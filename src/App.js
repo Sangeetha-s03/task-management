@@ -1,13 +1,14 @@
-import './App.css';
+import React from "react";
+import ProfileDropdown from "./pages/profile.js";
 
-function App() {
+function App  () {
   return (
-    <div className="App">
-      <header className="App-header">
-        This is a react app
-      </header>
-    </div>
+    < >
+       
+      <ProfileDropdown/>
+    </>
+   
   );
-}
+};
 
 export default App;
