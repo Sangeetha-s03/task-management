@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTheme } from "../context/theme"; // Import Theme Context Hook
 import DarkModeToggle from "../components/toggle";
-import prof from "../assets/prof.png";
-
 import ProfilePopup from "../components/popup"; // Import the new popup component
 
-// Import Light & Dark Mode Images
+import prof from "../assets/prof.png"; 
 import profLight from "../assets/prof2.png";
 import profDark from "../assets/prof3.jfif";
 import logoutLight from "../assets/lout.png";
@@ -14,25 +12,35 @@ import settingsLight from "../assets/sett.png";
 import settingsDark from "../assets/sett2.png";
 
 const ProfileDropdown = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isProfilePopupOpen, setProfilePopupOpen] = useState(false); 
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isProfilePopupOpen, setProfilePopupOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
+  // Toggle Dropdown
   const toggleDropdown = () => {
-    setIsOpen((prev) => !prev);
+    setDropdownOpen((prev) => !prev);
   };
 
-
+  // Toggle Profile Popup
   const toggleProfilePopup = () => {
     setProfilePopupOpen((prev) => !prev);
   };
+  const updateUserData = (updatedData) => {
+    setUserData(updatedData);
+  };
 
-  
+  const [userData, setUserData] = useState({
+    name: "Sam",
+    email: "sam@example.com",
+    phone: "1234567890",
+  });
+
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
+        setDropdownOpen(false);
       }
     };
 
@@ -47,35 +55,32 @@ const ProfileDropdown = () => {
       {/* Profile Button */}
       <button onClick={toggleDropdown} className="prof">
         <img src={prof} alt="Profile Avatar" className="avatar-img" />
-        <span className="username">Username</span>
-
+        <span className="username">{userData.name}</span>
       </button>
 
-      {/* Dropdown Popup */}
-      {isOpen && (
-        <div className="dropdown-menu">
-          <ul className="dropdown-list">
-            <li className="dropdown-item" onClick={toggleProfilePopup}>
-              <img src={theme === "dark" ? profDark : profLight} alt="Profile Icon" className="dropdown-icon" />
-              Profile
-            </li>
-            <li className="dropdown-item">
-              <img src={theme === "dark" ? settingsDark : settingsLight} alt="Settings Icon" className="dropdown-icon" />
-              Settings
-            </li>
-            <li className="dropdown-item">
-              <img src={theme === "dark" ? logoutDark : logoutLight} alt="Logout Icon" className="dropdown-icon" />
-              Logout
-            </li>
-            <hr className="dropdown-divider" />
-            {/* Dark Mode Toggle */}
-            <li className="dropdown-item toggle-container">
-              <span>Dark Mode</span>
-              <DarkModeToggle />
-            </li>
-          </ul>
-        </div>
-      )}
+      {/* Dropdown Menu */}
+      <div className={`dropdown-menu ${isDropdownOpen ? "show-dropdown" : ""}`}>
+        <ul className="dropdown-list">
+          <li className="dropdown-item" onClick={toggleProfilePopup}>
+            <img src={theme === "dark" ? profDark : profLight} alt="Profile Icon" className="dropdown-icon" />
+            Profile
+          </li>
+          <li className="dropdown-item">
+            <img src={theme === "dark" ? settingsDark : settingsLight} alt="Settings Icon" className="dropdown-icon" />
+            Settings
+          </li>
+          <li className="dropdown-item">
+            <img src={theme === "dark" ? logoutDark : logoutLight} alt="Logout Icon" className="dropdown-icon" />
+            Logout
+          </li>
+          <hr className="dropdown-divider" />
+          {/* Dark Mode Toggle */}
+          <li className="dropdown-item toggle-container">
+            <span>Dark Mode</span>
+            <DarkModeToggle />
+          </li>
+        </ul>
+      </div>
 
       {/* Profile Popup Component */}
       {isProfilePopupOpen && <ProfilePopup onClose={toggleProfilePopup} />}

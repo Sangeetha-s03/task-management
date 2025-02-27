@@ -35,7 +35,7 @@ body.dark {
 }
 
 .dropdown-menu {
-  position: absolute;
+  position: absolute !important; /* Ensure correct positioning */
   top: 50px;
   right: 0;
   width: 180px;
@@ -43,7 +43,11 @@ body.dark {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
-  z-index: 100;
+  z-index: 1000; /* Ensure dropdown appears above other elements */
+  display: none; /* Default state */
+}
+.show-dropdown {
+  display: block !important; /* Ensure dropdown remains visible */
 }
 .dropdown-list {
   list-style: none;
@@ -59,16 +63,17 @@ body.dark {
 
 body.dark .dropdown-menu {
   background: black;
-  color: white; 
+  color: white;
 }
-
 
 .dropdown-item {
   padding: 10px;
   cursor: pointer;
   transition: background 0.3s;
 }
-
+body.dark .dropdown-item{
+  color: white;
+}
 
 .dropdown-item:hover {
   background: #f5f5f5;
@@ -78,7 +83,6 @@ body.dark .dropdown-menu {
 body.dark .dropdown-item:hover {
   background: #444;
 }
-
 .dropdown-icon {
   width: 20px; 
   height: 20px;
@@ -152,6 +156,7 @@ body.dark .username {
   color: white;
 }
 
+
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -166,6 +171,7 @@ body.dark .username {
 }
 
 .popup-box {
+  position:relative;
   background: white;
   color: black;
   padding: 20px;
@@ -206,4 +212,76 @@ body.dark .username {
 .phn{
   font-size: 20px;
   text-align: justify;
+}
+
+/* Edit Button */
+.edit-btn {
+  margin-top: 10px;
+  background: blue;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.edit-btn:hover {
+  background: darkblue;
+}
+
+/* Form Fields */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.popup-box.dark input {
+  background: #333;
+  color: white;
+  border: 1px solid #555;
+}
+
+/* Save Button */
+.save-btn {
+  background: green;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background: darkgreen;
+}
+
+.close-btn {
+  font-size: 24px !important; /* Increase size */
+  color: black !important; /* Ensure visibility */
+  background: none !important;
+  border: none !important;
+  cursor: pointer;
+  padding: 5px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.popup-box.dark .close-btn {
+  color: white !important;
+}
+
+.close-btn:focus,
+.close-btn:active {
+  outline: none !important;
+  box-shadow: none !important;
 }
