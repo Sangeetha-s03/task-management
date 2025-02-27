@@ -1,11 +1,8 @@
-import './App.css';
-
+import Taskmanagement from "./pages/Taskmanagemant";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        This is a react app
-      </header>
+    <div>
+    <Taskmanagement />
     </div>
   );
 }
