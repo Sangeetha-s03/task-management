@@ -98,6 +98,7 @@ const Frontpage = () => {
           />
           {errors.phoneNumber && <span style={{ color: 'red', marginLeft: '10px' }}>{errors.phoneNumber}</span>}
         </div>
+        <Link to='/task'>
         <button
           type="submit"
           style={{
@@ -106,31 +107,18 @@ const Frontpage = () => {
             color: '#fff',
             border: 'none',
             borderRadius: '5px',
-            width: '100%',
+            width: '50%',
             cursor: 'pointer',
+            margin: '10px',
+            
+            
+          
           }}
         >
           Login
         </button>
+        </Link>
       </form>
-
-     
-      <Link to='/task'>
-        <button
-          style={{
-            marginTop: '20px',
-            padding: '10px 20px',
-            backgroundColor: '#6c757d',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '5px',
-            width: '100%',
-            cursor: 'pointer',
-          }}
-        >
-          Go to Task Page
-        </button>
-      </Link>
     </div>
   );
 };
