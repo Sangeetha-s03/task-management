@@ -1,0 +1,15 @@
+ .footer{
+    height: 200px;
+    width: 100vw;
+    background-color: rgb(91, 81, 124);
+    border: 1px solid #444950;
+   text-align: center;
+   padding-top: 50px;
+   font-size: larger;
+}
+.footer a:hover{
+    
+    color: #f1f1f1;
+    text-decoration:none;
+}
+    
