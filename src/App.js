@@ -1,11 +1,15 @@
-import './App.css';
 
-function App() {
+import Frontpage from "./pages/FrontPage";
+import TaskManager from "./pages/Taskmanager";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+function App() { 
   return (
-    <div className="App">
-      <header className="App-header">
-        This is a react app
-      </header>
+    <div>
+       <Routes>
+    <Route path='/' element={<Frontpage />} />
+    <Route path ='/task' element={<TaskManager/>} />
+    </Routes> 
     </div>
   );
 }
