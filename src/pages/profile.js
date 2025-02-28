@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useTheme } from "../context/theme"; // Import Theme Context Hook
+import { useTheme } from "../context/theme";
 import DarkModeToggle from "../components/toggle";
-import ProfilePopup from "../components/popup"; // Import the new popup component
+import ProfilePopup from "../components/popup"; 
 
 import prof from "../assets/prof.png"; 
 import profLight from "../assets/prof2.png";
@@ -17,26 +17,40 @@ const ProfileDropdown = () => {
   const dropdownRef = useRef(null);
   const { theme } = useTheme();
 
-  // Toggle Dropdown
+  
+  const [userData, setUserData] = useState(() => {
+    const storedData = localStorage.getItem("userData");
+    return storedData ? JSON.parse(storedData) : { name: "Sam", email: "sam@example.com", phone: "1234567890" };
+  });
+
+  const updateUserData = (updatedData) => {
+    setUserData(updatedData);
+    localStorage.setItem("userData", JSON.stringify(updatedData)); 
+  };
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("userData");
+    if (storedData) {
+      setUserData(JSON.parse(storedData));
+    }
+  }, []);
+
+  
   const toggleDropdown = () => {
     setDropdownOpen((prev) => !prev);
   };
 
-  // Toggle Profile Popup
-  const toggleProfilePopup = () => {
-    setProfilePopupOpen((prev) => !prev);
-  };
-  const updateUserData = (updatedData) => {
-    setUserData(updatedData);
+  
+  const openProfilePopup = () => {
+    setDropdownOpen(false);
+    setProfilePopupOpen(true);
   };
 
-  const [userData, setUserData] = useState({
-    name: "Sam",
-    email: "sam@example.com",
-    phone: "1234567890",
-  });
+  
+  const closeProfilePopup = () => {
+    setProfilePopupOpen(false);
+  };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -55,13 +69,13 @@ const ProfileDropdown = () => {
       {/* Profile Button */}
       <button onClick={toggleDropdown} className="prof">
         <img src={prof} alt="Profile Avatar" className="avatar-img" />
-        <span className="username">{userData.name}</span>
+        <span className="username">{userData.name}</span> 
       </button>
 
       {/* Dropdown Menu */}
       <div className={`dropdown-menu ${isDropdownOpen ? "show-dropdown" : ""}`}>
         <ul className="dropdown-list">
-          <li className="dropdown-item" onClick={toggleProfilePopup}>
+          <li className="dropdown-item" onClick={openProfilePopup}>
             <img src={theme === "dark" ? profDark : profLight} alt="Profile Icon" className="dropdown-icon" />
             Profile
           </li>
@@ -82,8 +96,8 @@ const ProfileDropdown = () => {
         </ul>
       </div>
 
-      {/* Profile Popup Component */}
-      {isProfilePopupOpen && <ProfilePopup onClose={toggleProfilePopup} />}
+      
+      {isProfilePopupOpen && <ProfilePopup userData={userData} onUpdate={updateUserData} onClose={closeProfilePopup} />}
     </div>
   );
 };

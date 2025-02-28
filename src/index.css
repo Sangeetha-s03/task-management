@@ -264,24 +264,17 @@ input {
   background: darkgreen;
 }
 
-.close-btn {
-  font-size: 24px !important; /* Increase size */
-  color: black !important; /* Ensure visibility */
-  background: none !important;
-  border: none !important;
+ .close-btn {
+  font-size: 18px !important; 
   cursor: pointer;
   padding: 5px;
   position: absolute;
   top: 5px;
   right: 5px;
 }
+  
 
-.popup-box.dark .close-btn {
+
+body.dark .close-btn {
   color: white !important;
-}
-
-.close-btn:focus,
-.close-btn:active {
-  outline: none !important;
-  box-shadow: none !important;
-}
+} 
