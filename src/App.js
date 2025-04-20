@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from './pages/Sidebar';
@@ -21,6 +22,7 @@ function App() {
         <Route path ="/Task" element={<Task/>}/>
         <Route path="/User" element={<User/>}/>
         <Route path="/Report" element={<Report/>}/>
+        <Route path="/Profile" element={<ProfileDropdown/>}/>        
       </Routes>
     </div>
   </div>
@@ -29,5 +31,6 @@ function App() {
 </>
  );
 }
+
 
 export default App;
